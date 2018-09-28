@@ -1,9 +1,8 @@
 {
     "name": "nightwatch-vrt",
-    "version": "0.2.6",
+    "version": "1.0.0",
     "description": "Nightwatch Visual Regression Testing tools",
     "license": "MIT",
-    "author": "Crunch.io <dev@crunch.io>",
     "contributors": [
         {
             "name": "Connor Schlesiger",
@@ -12,6 +11,9 @@
         {
             "name": "Matt Steitle",
             "email": "msteitle@crunch.io"
+        },
+        {
+            "name": "Gergely Nemeth"
         }
     ],
     "keywords": [
@@ -23,13 +25,13 @@
         "visual-regression-testing",
         "nightwatch"
     ],
-    "homepage": "https://github.com/Crunch-io/nightwatch-vrt",
+    "homepage": "https://github.com/gergelyke/nightwatch-vrt",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Crunch-io/nightwatch-vrt.git"
+        "url": "git+https://github.com/gergelyke/nightwatch-vrt.git"
     },
     "bugs": {
-        "url": "https://github.com/Crunch-io/nightwatch-vrt/issues"
+        "url": "https://github.com/gergelyke/nightwatch-vrt/issues"
     },
     "types": "index",
     "scripts": {

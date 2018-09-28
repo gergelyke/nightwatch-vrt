@@ -7,13 +7,13 @@ Nightwatch Visual Regression Testing tools for `nightwatch.js`
 
 ## Description
 
-Nightwatch VRT extends [nightwatch.js](http://nightwatchjs.org/) with an assertion that captures a screenshot of a DOM element identified by a selector and compares the screenshot against a baseline screenshot. If the baseline screenshot does not exist, it will be created the first time you run the test and the assertion will pass.
+Nightwatch VRT extends [nightwatch.js](http://nightwatchjs.org/) with an assertion that captures a screenshot of the body and compares the screenshot against a baseline screenshot. If the baseline screenshot does not exist, it will be created the first time you run the test and the assertion will pass.
 
 ## Configuration
 
 Include the following sections in the `nightwatch` [configuration file](http://nightwatchjs.org/gettingstarted#settings-file)
 
-#### Custom commands and assertions
+### Custom commands and assertions
 
 Register `nightwatch-vrt`'s assertion and commands:
 
@@ -26,7 +26,7 @@ Register `nightwatch-vrt`'s assertion and commands:
     ]
 ```
 
-#### Nightwatch VRT custom settings
+### Nightwatch VRT custom settings
 
 Then, for global settings, add the `visual_regression_settings` entry to nightwatch's `globals` [`globals`](http://nightwatchjs.org/gettingstarted#test-settings) section
 
@@ -63,7 +63,7 @@ default: {
 | always_save_diff_screenshot | If true, recently captured screenshots will always override the baseline                                         | false          |
 \* *Only necessary if screenshots are set to reside in the same directory*
 
-#### Nightwatch VRT screenshot path generator
+### Nightwatch VRT screenshot path generator
 
 The screenshot path generator option accepts a function that generates a dynamic path based on the test properties, and returns that string.
 
@@ -71,7 +71,7 @@ The screenshot path generator option accepts a function that generates a dynamic
 |------------------|------------------------------------------------------------------------------------------------|
 | nightwatchClient | The nightwatch client test instance                                                            |
 | basePath         | The base path for the screenshot set in `visual_regression_settings` (e.g. *_screenshots_path) |
-| fileName         | The file name; either the selector used or the custom name given for the test                  |
+| fileName         | The file name                                                                                  |
 |  ***returns***   | A string which contains the full path - minus the file extension                               |
 
 For example:
@@ -87,12 +87,11 @@ function generateScreenshotFilePath(nightwatchClient, basePath, fileName) {
 
 ## Usage
 
-In order to use `nightwatch-vrt`, you only need to invoke the `screenshotIdenticalToBaseline` assertion and pass a css selector for the DOM element to compare. You may also pass a custom filename, `visual_regression_settings` overrides, and a custom log message.
+In order to use `nightwatch-vrt`, you only need to invoke the `screenshotIdenticalToBaseline` assertion for the comparison. You may also pass a custom filename, `visual_regression_settings` overrides, and a custom log message.
 
 | Parameter        | Description                                                                                    |
 |------------------|------------------------------------------------------------------------------------------------|
-| selector         | Identifies the element that will be captured in the screenshot.                                |
-| fileName         | Optional file name for this screenshot; defaults to the selector                               |
+| fileName         | Optional file name for this screenshot                                                         |
 | settings         | Optional settings to override the defaults and `visual_regression_settings`                    |
 | message          | Optional message for `nightwatch` to log upon completion                                       |
 

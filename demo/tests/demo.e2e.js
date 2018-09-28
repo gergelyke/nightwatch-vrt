@@ -6,7 +6,7 @@ module.exports = {
             .url('http://localhost:8080/demo2/')
             .waitForElementVisible('body', 1000)
             .resizeWindow(1024, 768)
-            .assert.screenshotIdenticalToBaseline('body h1')
+            .assert.screenshotIdenticalToBaseline('render-test-bodyh1')
             .end()
     }
 }

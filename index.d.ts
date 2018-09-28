@@ -28,12 +28,11 @@ declare module "nightwatch" {
          * that order. Further assertions will compare against the screenshot that was
          * saved in the first execution of the assertion.
          *
-         * @param {String} elementId Identifies the element that will be captured in the screenshot.
-         * @param {String} fileName Optional file name for this screenshot; defaults to the selector
+         * @param {String} fileName Optional file name for this screenshot
          * @param {NightwatchVRTOptions} settings Optional settings to override the defaults and `visual_regression_settings`
          * @param {String} message Optional message for `nightwatch` to log upon completion
          */
-        screenshotIdenticalToBaseline: (elementId: string, fileName?: string, options?: NightwatchVRTSettings, message?: string) => this;
+        screenshotIdenticalToBaseline: (fileName?: string, options?: NightwatchVRTSettings, message?: string) => this;
     }
 
     export interface NightwatchAPI {
@@ -42,10 +41,9 @@ declare module "nightwatch" {
          * of an element.
         *
          * @link
-         * @param {string} selector Identifies the element that will be captured in the screenshot.
          * @param {function} callback Callback function which is called with the captured screenshot as an argument.
          * @returns {Object} The captured screenshot. This object is a Jimp (library) image instance.
          */
-        captureElementScreenshot: (elementId: string, callback?: (arg?: any) => void) => this
+        captureElementScreenshot: (callback?: (arg?: any) => void) => this
     }
 }

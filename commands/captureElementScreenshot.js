@@ -22,52 +22,20 @@ function CaptureElementScreenshot() {
 util.inherits(CaptureElementScreenshot, EventEmitter)
 
 CaptureElementScreenshot.prototype.command = function command(
-    selector,
     callback = () => {} // eslint-disable-line no-empty-function
 ) {
     const api = this.client.api
 
     Promise.all([
-        promisifyCommand(api, 'getLocationInView', [selector]),
-        promisifyCommand(api, 'getElementSize', [selector]),
         promisifyCommand(api, 'screenshot', [false])
-    ]).then(([location, size, screenshotEncoded]) => {
-        const { x, y } = location
-        let { width, height } = size
-
-        if (width === 0 || height === 0) {
-            this.client.assertion(
-                false,
-                null,
-                null,
-                `The element identified by the selector <${selector}> is not visible or its dimensions equals 0. width: ${width}, height: ${height}`, // eslint-disable-line max-len
-                true
-            )
-        }
+    ]).then(([screenshotEncoded]) => {
 
         Jimp.read(new Buffer(screenshotEncoded, 'base64')).then((screenshot) => {
-            /**
-             * https://www.w3.org/TR/webdriver/#take-screenshot
-             * "The Take Screenshot command takes a screenshot of the top-level browsing context’s viewport."
-             *
-             * If the target element extends outside of the viewport, the expected
-             * dimentions will exceed the actual dimensions, resulting in a
-             * "RangeError: out of range index" exception (from Buffer)
-             */
-            if ((y + height) > screenshot.bitmap.height) {
-                height = (screenshot.bitmap.height - y)
-            }
-
-            if ((x + width) > screenshot.bitmap.width) {
-                width = (screenshot.bitmap.width - x)
-            }
-
-            screenshot.crop(x, y, width, height)
             this.client.assertion(
                 true,
                 null,
                 null,
-                `The screenshot for selector <${selector}> was captured successfully.`,
+                `The screenshot was captured successfully.`,
                 true
             )
 
@@ -79,7 +47,7 @@ CaptureElementScreenshot.prototype.command = function command(
             false,
             'success',
             errorMessage,
-            `The screenshot for selector <${selector}> could not be captured.`
+            `The screenshot could not be captured.`
         )
         this.emit('complete', errorMessage, this)
     })

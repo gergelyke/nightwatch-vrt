@@ -16,19 +16,17 @@ const compareWithBaseline = require('../lib/compare-with-baseline')
  * that order. Further assertions will compare against the screenshot that was
  * saved in the first execution of the assertion.
  *
- * @param {String} selector Identifies the element that will be captured in the screenshot.
- * @param {String} fileName Optional file name for this screenshot; defaults to the selector
+ * @param {String} fileName Optional file name for this screenshot
  * @param {NightwatchVRTOptions} settings Optional settings to override the defaults and `visual_regression_settings`
  * @param {String} message Optional message for `nightwatch` to log upon completion
  */
 exports.assertion = function screenshotIdenticalToBaseline(
-    elementId,
-    fileName = elementId,
+    fileName,
     settings,
     message
 ) {
 
-    this.message = message || `Visual regression test results for element <${elementId}>.`
+    this.message = message || `Visual regression test results for element <${fileName}>.`
     this.expected = true
 
     this.pass = function pass(value) {
@@ -45,8 +43,8 @@ exports.assertion = function screenshotIdenticalToBaseline(
 
         this
             .api
-            .waitForElementVisible(elementId, 5000)
-            .captureElementScreenshot(elementId, (elementScreenshot) => {
+            .waitForElementVisible('body', 5000)
+            .captureElementScreenshot((elementScreenshot) => {
                 screenshot = elementScreenshot
             })
             .perform((done) => {
