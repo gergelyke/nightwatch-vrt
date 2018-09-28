@@ -5,6 +5,10 @@
 
 Nightwatch Visual Regression Testing tools for `nightwatch.js`
 
+```sh
+npm install @gergelyke/nightwatch-vrt --save-dev
+```
+
 ## Description
 
 Nightwatch VRT extends [nightwatch.js](http://nightwatchjs.org/) with an assertion that captures a screenshot of the body and compares the screenshot against a baseline screenshot. If the baseline screenshot does not exist, it will be created the first time you run the test and the assertion will pass.
@@ -15,14 +19,14 @@ Include the following sections in the `nightwatch` [configuration file](http://n
 
 ### Custom commands and assertions
 
-Register `nightwatch-vrt`'s assertion and commands:
+Register `@gergelyke/nightwatch-vrt`'s assertion and commands:
 
 ```JavaScript
     custom_commands_path: [
-        'node_modules/nightwatch-vrt/commands'
+        'node_modules/@gergelyke/nightwatch-vrt/commands'
     ],
     custom_assertions_path: [
-        'node_modules/nightwatch-vrt/assertions'
+        'node_modules/@gergelyke/nightwatch-vrt/assertions'
     ]
 ```
 
